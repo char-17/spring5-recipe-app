@@ -1,17 +1,19 @@
 package guru.springframework.domain;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.Set;
 
 @Entity
-public class UnitOfMesure {
+public class Category {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+
     private Long id;
     private String description;
+
+    @ManyToMany(mappedBy = "categories")
+    private Set<Recipe> recipe;
 
     public Long getId() {
         return id;
@@ -27,5 +29,13 @@ public class UnitOfMesure {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public Set<Recipe> getRecipe() {
+        return recipe;
+    }
+
+    public void setRecipe(Set<Recipe> recipe) {
+        this.recipe = recipe;
     }
 }
